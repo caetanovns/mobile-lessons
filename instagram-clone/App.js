@@ -3,7 +3,7 @@ import Auth from './src/pages/auth';
 
 export default function App() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="auto" barStyle={'dark-content'} backgroundColor={'white'}/>
       <Auth />
     </SafeAreaView>

@@ -1,27 +1,44 @@
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import logo from "../../../assets/instagram_logo.png";
 import profile_logo from "../../../assets/user.png";
 
 export default function Auth() {
     return <>
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <View style={styles.container_logo}>
+        <View style={styles.form_container}>
+            <View style={styles.center_container}>
                 <Image source={logo} style={styles.image_logo} />
             </View>
-            <View style={styles.container_logo}>
+
+            <View style={styles.center_container}>
                 <Image source={profile_logo} />
             </View>
+
+            <TouchableOpacity style={styles.button_container}>
+                <Text style={styles.login_button}>Log In</Text>
+            </TouchableOpacity>
+
+            <View style={styles.center_container}>
+                <Text style={styles.text_color}>Switch accounts</Text>
+            </View>
+
         </View>
-        <TouchableOpacity style={styles.button_container}>
-            <Text style={styles.login_button}>Log In</Text>
-        </TouchableOpacity>
+        <View style={styles.footer}>
+            <Text style={styles.signup_text}>Don't have an accounts?</Text>
+            <Text style={[styles.signup_text, { opacity: 1, fontWeight: 'bold', marginLeft: 10 }]}>Sign up.</Text>
+        </View>
     </>
 }
 
 const styles = StyleSheet.create({
-    container_logo: {
+    center_container: {
         flexDirection: 'row',
+        justifyContent: 'center',
+        paddingBottom: 10,
+        paddingTop: 30
+    },
+    form_container: {
+        flex: 1,
         justifyContent: 'center',
     },
     image_logo: {
@@ -32,11 +49,27 @@ const styles = StyleSheet.create({
         paddingRight: 40,
     },
     login_button: {
-        fontSize: 18,
+        fontSize: 16,
         color: 'white',
         textAlign: 'center',
-        padding: 20,
+        padding: 12.5,
         backgroundColor: '#3797EF',
-        borderRadius: 10
+        borderRadius: 4
+    },
+    text_color: {
+        color: '#3797EF',
+        fontWeight: 'bold'
+    },
+    signup_text: {
+        color: "#262626",
+        opacity: 0.4
+    },
+    footer: {
+        flexDirection: "row",
+        justifyContent: 'center',
+        height: 84,
+        paddingTop: 15,
+        borderTopWidth: 0.5,
+        borderTopColor: "#ccc"
     }
 });
