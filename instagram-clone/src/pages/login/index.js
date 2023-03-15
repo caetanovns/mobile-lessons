@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     form_container: {
-        flex: 2,
+        flex: 1,
         justifyContent: 'center',
     },
     button_container: {
