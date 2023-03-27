@@ -1,9 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import logo from "../../../assets/instagram_logo.png";
 import profile_logo from "../../../assets/user.png";
 
-export default function Auth({ navigation }) {
+export default function Auth() {
+    
+    const navigation = useNavigation();
+    
     return <>
         <View style={styles.form_container}>
             <View style={styles.center_container}>
@@ -15,7 +19,10 @@ export default function Auth({ navigation }) {
             </View>
 
             <TouchableOpacity style={styles.button_container}
-                onPress={() => { navigation.navigate('login') }}>
+                onPress={() => { navigation.navigate('login', {
+                    'username' : 'caetanovns',
+                    'password': 'senha@123'
+                }) }}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 

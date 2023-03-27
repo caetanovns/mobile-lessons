@@ -3,8 +3,16 @@ import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "reac
 import instagram_logo from "../../../assets/instagram_logo.png";
 
 import facebook_logo from "../../../assets/facebook.png";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-export default function Login({ navigation }) {
+export default function Login() {
+
+    const navigation = useNavigation();
+
+    const route = useRoute();
+    const { username, password } = route.params;
+    console.log(username);
+    console.log(password);
     return <>
         <View style={styles.form_container}>
             <View style={styles.center_container}>
@@ -12,17 +20,17 @@ export default function Login({ navigation }) {
             </View>
 
             <View style={styles.center_container}>
-                <TextInput style={styles.input} placeholder={"Username"} />
+                <TextInput style={styles.input} placeholder={"Username"} value={username} />
             </View>
 
             <View style={styles.center_container}>
-                <TextInput secureTextEntry={true} style={styles.input} placeholder={"Password"} />
+                <TextInput secureTextEntry={true} style={styles.input} placeholder={"Password"} value={password}/>
             </View>
 
             <Text style={styles.forgot_text}>Forgot Password?</Text>
 
             <TouchableOpacity style={styles.button_container}
-            onPress={() => {}}>
+                onPress={() => { }}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 
