@@ -11,7 +11,7 @@ import Media from '../pages/media';
 const Tab = createBottomTabNavigator();
 
 export default function HomeScreenRouters() {
-    return <NavigationContainer>
+    return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
@@ -38,5 +38,5 @@ export default function HomeScreenRouters() {
             <Tab.Screen name="notification" component={Notification} />
             <Tab.Screen name="profile" component={Profile} />
         </Tab.Navigator>
-    </NavigationContainer>
+    );
 }

@@ -16,4 +16,36 @@
 "react-native-ionicons": "^4.6.5",
 ```
 
-## 2
+- Para obter mais informações a respeito da navegação, acesse [React Navigation](https://reactnavigation.org/)
+
+## 2. Tab Navigation
+
+```js
+export default function HomeScreenRouters() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="feed" component={Feed} />
+            <Tab.Screen name="search" component={Search} />
+            <Tab.Screen name="media" component={Media} />
+            <Tab.Screen name="notification" component={Notification} />
+            <Tab.Screen name="profile" component={Profile} />
+        </Tab.Navigator>
+    );
+}
+```
+
+## 3. Stack Navigation
+
+```js
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+export default function Routers() {
+    return <Stack.Navigator>
+        <Stack.Screen name="auth" component={Auth} />
+        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen name="home_screen_routers" component={HomeScreenRouters} />
+    </Stack.Navigator>
+}
+```

@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import logo from "../../../assets/instagram_logo.png";
 import profile_logo from "../../../assets/user.png";
 
-export default function Auth() {
+export default function Auth({ navigation }) {
     return <>
         <View style={styles.form_container}>
             <View style={styles.center_container}>
@@ -14,7 +14,8 @@ export default function Auth() {
                 <Image source={profile_logo} />
             </View>
 
-            <TouchableOpacity style={styles.button_container}>
+            <TouchableOpacity style={styles.button_container}
+                onPress={() => { navigation.navigate('login') }}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 

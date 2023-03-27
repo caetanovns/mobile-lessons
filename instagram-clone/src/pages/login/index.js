@@ -4,7 +4,7 @@ import instagram_logo from "../../../assets/instagram_logo.png";
 
 import facebook_logo from "../../../assets/facebook.png";
 
-export default function Login() {
+export default function Login({ navigation }) {
     return <>
         <View style={styles.form_container}>
             <View style={styles.center_container}>
@@ -21,7 +21,8 @@ export default function Login() {
 
             <Text style={styles.forgot_text}>Forgot Password?</Text>
 
-            <TouchableOpacity style={styles.button_container}>
+            <TouchableOpacity style={styles.button_container}
+            onPress={() => {}}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 

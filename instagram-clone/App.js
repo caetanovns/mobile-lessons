@@ -1,17 +1,25 @@
+import 'react-native-gesture-handler';
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import Auth from './src/pages/auth';
 import Feed from './src/pages/feed';
 import Login from './src/pages/login';
 import HomeScreenRouters from './src/routes/home_screen_routes';
+import Routers from './src/routes/routes';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="auto" barStyle={'dark-content'} backgroundColor={'white'} />
+      
+      <NavigationContainer>
+        <Routers />
+      </NavigationContainer>
+
       {/* <Login/> */}
       {/*<Auth />*/}
       {/* <Feed/> */}
-      <HomeScreenRouters/>
+      {/* <HomeScreenRouters/> */}
     </SafeAreaView>
   );
 }
