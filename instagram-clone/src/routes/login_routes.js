@@ -10,7 +10,7 @@ const getIsSignedIn = () => {
     return true;
   };
 
-export default function Routers() {
+export default function LoginRouters() {
 
     const isSignedIn = getIsSignedIn();
 

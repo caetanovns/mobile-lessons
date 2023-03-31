@@ -5,9 +5,9 @@ import logo from "../../../assets/instagram_logo.png";
 import profile_logo from "../../../assets/user.png";
 
 export default function Auth() {
-    
+
     const navigation = useNavigation();
-    
+
     return <>
         <View style={styles.form_container}>
             <View style={styles.center_container}>
@@ -18,17 +18,20 @@ export default function Auth() {
                 <Image source={profile_logo} />
             </View>
 
-            <TouchableOpacity style={styles.button_container}
-                onPress={() => { navigation.navigate('login', {
-                    'username' : 'caetanovns',
-                    'password': 'senha@123'
-                }) }}>
+            <TouchableOpacity style={styles.button_container}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 
-            <View style={styles.center_container}>
-                <Text style={styles.text_color}>Switch accounts</Text>
-            </View>
+            <TouchableOpacity onPress={() => {
+                navigation.navigate('login', {
+                    'username': 'caetanovns',
+                    'password': 'senha@123'
+                })
+            }}>
+                <View style={styles.center_container}>
+                    <Text style={styles.text_color}>Switch accounts</Text>
+                </View>
+            </TouchableOpacity>
 
         </View>
         <View style={styles.footer}>
