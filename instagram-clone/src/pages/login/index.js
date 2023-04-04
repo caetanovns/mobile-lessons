@@ -5,14 +5,15 @@ import instagram_logo from "../../../assets/instagram_logo.png";
 import facebook_logo from "../../../assets/facebook.png";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-export default function Login() {
+export default function Login({ onPress }) {
 
     const navigation = useNavigation();
 
     const route = useRoute();
+
     const { username, password } = route.params;
-    console.log(username);
-    console.log(password);
+
+
     return <>
         <View style={styles.form_container}>
             <View style={styles.center_container}>
@@ -24,13 +25,13 @@ export default function Login() {
             </View>
 
             <View style={styles.center_container}>
-                <TextInput secureTextEntry={true} style={styles.input} placeholder={"Password"} value={password}/>
+                <TextInput secureTextEntry={true} style={styles.input} placeholder={"Password"} value={password} />
             </View>
 
             <Text style={styles.forgot_text}>Forgot Password?</Text>
 
             <TouchableOpacity style={styles.button_container}
-                onPress={() => { }}>
+                onPress={onPress}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 

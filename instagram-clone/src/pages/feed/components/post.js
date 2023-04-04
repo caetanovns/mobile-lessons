@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import profile from '../../../../assets/stories/caetano.jpg';
@@ -8,13 +8,24 @@ import MoreIcon from '../../../../assets/feed/more.svg';
 import post from '../../../../assets/feed/post_example.png';
 
 import LikeIcon from '../../../../assets/feed/like.svg';
+import LikeFillIcon from '../../../../assets/feed/like_fill.svg';
 import CommentIcon from '../../../../assets/feed/comment.svg';
 import MessagerIcon from '../../../../assets/feed/messager.svg';
 
 import SaveIcon from '../../../../assets/feed/save.svg';
 
-export default function Post() {
-    
+export default function Post({ liked }) {
+
+    const [postlike, setpostlike] = useState(liked);
+
+    const PostLiked = ({ liked }) => {
+        if (liked) {
+            return <LikeFillIcon style={{ marginLeft: 5 }} />;
+        } else {
+            return <LikeIcon style={{ marginLeft: 5 }} />;
+        }
+    }
+
     return (
         <View style={{ borderBottomColor: "#B3B3B3", borderBottomWidth: 0.5, paddingBottom: 10 }}>
             <View style={styles.container}>
@@ -32,15 +43,19 @@ export default function Post() {
 
             <View style={styles.post_container}>
                 <View style={styles.post_buttons_container}>
-                    <TouchableOpacity onPress={() => { }}>
-                        < LikeIcon style={{ marginLeft: 5 }} />
+
+                    <TouchableOpacity onPress={() => { setpostlike(!postlike) }}>
+                        <PostLiked liked={postlike} />
                     </TouchableOpacity>
+
                     < CommentIcon style={{ marginLeft: 20, marginRight: 20 }} />
+
                     <TouchableOpacity onPress={() => { }}>
                         < MessagerIcon style={{ marginTop: 1 }} />
                     </TouchableOpacity>
+
                 </View>
-                
+
                 <TouchableOpacity>
                     <SaveIcon style={{ marginRight: 5 }} />
                 </TouchableOpacity>

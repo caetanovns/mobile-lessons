@@ -14,7 +14,7 @@ export default function Feed() {
             <Stories />
             <FlatList
                 data={post_mock}
-                renderItem={({ item }) => <Post />}
+                renderItem={({ item }) => <Post liked={item.liked}/>}
             />
         </View>
     );
