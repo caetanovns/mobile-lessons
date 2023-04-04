@@ -10,11 +10,16 @@ import Post from "./components/post";
 export default function Feed() {
     return (
         <View style={{ backgroundColor: 'white' }}>
-            <TopContainer />
-            <Stories />
+
             <FlatList
                 data={post_mock}
-                renderItem={({ item }) => <Post liked={item.liked}/>}
+                ListHeaderComponent={
+                    <>
+                        <TopContainer />
+                        <Stories />
+                    </>
+                }
+                renderItem={({ item }) => <Post liked={item.liked} />}
             />
         </View>
     );

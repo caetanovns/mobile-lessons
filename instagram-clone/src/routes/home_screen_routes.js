@@ -35,7 +35,6 @@ export default function HomeScreenRouters() {
                 headerShown: false,
                 tabBarShowLabel: false
             })}
-
         >
             <Tab.Screen name="feed" component={Feed} />
             <Tab.Screen name="search" component={Search} />
