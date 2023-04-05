@@ -4,6 +4,9 @@ import instagram_logo from "../../../assets/instagram_logo.png";
 
 import facebook_logo from "../../../assets/facebook.png";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useContext, useState } from "react";
+import AuthContext from "../../routes/auth_context";
+
 
 export default function Login({ onPress }) {
 
@@ -11,8 +14,13 @@ export default function Login({ onPress }) {
 
     const route = useRoute();
 
-    const { username, password } = route.params;
+    const { user, pass } = route.params;
 
+    const [username, setUsername] = useState('');
+
+    const [password, setPassword] = useState('');
+
+    const { signIn } = useContext(AuthContext);
 
     return <>
         <View style={styles.form_container}>
@@ -21,17 +29,17 @@ export default function Login({ onPress }) {
             </View>
 
             <View style={styles.center_container}>
-                <TextInput style={styles.input} placeholder={"Username"} value={username} />
+                <TextInput style={styles.input} placeholder={"Username"} value={username} onChangeText={setUsername} />
             </View>
 
             <View style={styles.center_container}>
-                <TextInput secureTextEntry={true} style={styles.input} placeholder={"Password"} value={password} />
+                <TextInput secureTextEntry={true} style={styles.input} placeholder={"Password"} value={password} onChangeText={setPassword} />
             </View>
 
             <Text style={styles.forgot_text}>Forgot Password?</Text>
 
             <TouchableOpacity style={styles.button_container}
-                onPress={onPress}>
+                onPress={() => { signIn({ username, password }) }}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 

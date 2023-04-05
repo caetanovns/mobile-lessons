@@ -10,12 +10,11 @@ import Post from "./components/post";
 export default function Feed() {
     return (
         <View style={{ backgroundColor: 'white' }}>
-
+            <TopContainer />
             <FlatList
                 data={post_mock}
                 ListHeaderComponent={
                     <>
-                        <TopContainer />
                         <Stories />
                     </>
                 }

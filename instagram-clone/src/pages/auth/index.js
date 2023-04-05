@@ -1,12 +1,16 @@
 import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import logo from "../../../assets/instagram_logo.png";
 import profile_logo from "../../../assets/user.png";
+import AuthContext from "../../routes/auth_context";
 
 export default function Auth() {
 
     const navigation = useNavigation();
+
+    const { signIn } = useContext(AuthContext);
 
     return <>
         <View style={styles.form_container}>
@@ -18,14 +22,14 @@ export default function Auth() {
                 <Image source={profile_logo} />
             </View>
 
-            <TouchableOpacity style={styles.button_container}>
+            <TouchableOpacity style={styles.button_container} onPress={() => { signIn() }}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
                 navigation.navigate('login', {
-                    'username': 'caetanovns',
-                    'password': 'senha@123'
+                    'user': 'teste',
+                    'pass': 'teste'
                 })
             }}>
                 <View style={styles.center_container}>
