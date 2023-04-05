@@ -6,6 +6,8 @@
   - Adicionar botão de like
   - Adicionar botão de save
   - Remover circulo do storie quando clicado
+  - ENTREGAR TDE 2
+    - ASD
 
 ```js
  const [teste, setTeste] = useState(1);
