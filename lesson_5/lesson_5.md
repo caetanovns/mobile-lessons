@@ -6,8 +6,10 @@
   - Adicionar botão de like
   - Adicionar botão de save
   - Remover circulo do storie quando clicado
-  - ENTREGAR TDE 2
-    - ASD
+  - Entrega docente TDE 2
+    - Construção da páginas:
+      - Login, Tela principal da aplicação
+      - Fluxo de login funcional
 
 ```js
  const [teste, setTeste] = useState(1);
