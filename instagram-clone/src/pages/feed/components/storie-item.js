@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // import photo from "../../../../assets/feed/profile.png";
@@ -5,10 +6,14 @@ import StoryIcon from "../../../../assets/feed/story.svg";
 
 
 export default function StorieItem({ name, photo, has_storie }) {
-    return <TouchableOpacity>
+
+    const [viewStorie, setviewStorie] = useState(has_storie);
+
+    console.log(viewStorie);
+    return <TouchableOpacity onPress={() => { setviewStorie(false) }}>
         <View style={{ marginRight: 15 }}>
             <Image source={photo} style={styles.profile} />
-            {has_storie ? <StoryIcon style={styles.circle} width={78} height={78} /> : null}
+            {viewStorie ? <StoryIcon style={styles.circle} width={78} height={78} /> : null}
             <Text style={styles.text}>{name}</Text>
         </View>
     </TouchableOpacity>

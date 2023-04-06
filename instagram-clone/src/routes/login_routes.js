@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 export default function LoginRouters() {
 
-    const [isSignedIn, setisSignedIn] = useState(false);
+    const [isSignedIn, setisSignedIn] = useState(true);
 
     // Pode tentar recuperar o token, 
     // para que o usuário não precise 
