@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../routes/auth_context";
 import { VStack, HStack, Text, Avatar, Button } from "native-base";
-import { Feather, FontAwesome} from '@expo/vector-icons';
+import { Feather, FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
 import { FlatList } from "react-native";
 
@@ -10,12 +10,16 @@ import Oval2 from '../../../assets/profile/Oval-1.png';
 import Oval3 from '../../../assets/profile/Oval-2.png';
 import MoreIcon from '../../../assets/more.png';
 
+import { finduser } from "../../services/requests/users";
 
 export default function Profile() {
+
+    const [user, setUser] = useState({});
+
     const UserProfileData = [
-        { label: 'Posts', number: 54 },
-        { label: 'Followers', number: 834 },
-        { label: 'Following', number: 162 }
+        { label: 'Posts', number: user.posts },
+        { label: 'Followers', number: user.followers },
+        { label: 'Following', number: user.following }
     ]
 
     const UserDestaquesData = [
@@ -32,6 +36,13 @@ export default function Profile() {
 
     const { signOut } = useContext(AuthContext);
 
+    async function findProfile() {
+        const result = await finduser()
+        if (result) {
+            setUser(result)
+        }
+    }
+
     return (
         <VStack flex={1} bg={'#FFFFFF'}>
             <VStack py={4} justifyContent={'flex-end'} alignItems={'flex-end'}>
@@ -39,7 +50,7 @@ export default function Profile() {
                     <TouchableOpacity>
                         <HStack alignItems={'center'} justifyContent={'flex-end'}>
                             <FontAwesome name='lock' size={24} color='black' />
-                            <Text px={3}>jacob_w</Text>
+                            <Text px={3}>{user.username}</Text>
                             <Feather name='chevron-down' size={24} color='black' />
                         </HStack>
                     </TouchableOpacity>
@@ -51,7 +62,7 @@ export default function Profile() {
             </VStack>
 
             <HStack justifyContent={'space-around'} marginLeft={3}>
-                <Avatar source={{uri: 'https://via.placeholder.com/150'} } size={'xl'}>
+                <Avatar source={{ uri: 'https://via.placeholder.com/150' }} size={'xl'}>
                     <Avatar.Badge bg="green.500" />
                 </Avatar>
                 <HStack justifyContent={'flex-end'} alignItems={'center'}>
@@ -65,11 +76,13 @@ export default function Profile() {
             </HStack>
 
             <VStack pt={3} px={3} marginLeft={3}>
-                <Text>Jacob West</Text>
+                <Text>{user.name}</Text>
                 <Text>Digital godies designer @pixellz</Text>
                 <Text>Everything is designed.</Text>
-
-                <Button _pressed={{ backgroundColor: 'gray.200' }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2}>
+                <TouchableOpacity onPress={findProfile}>
+                    <Text>click aqui</Text>
+                </TouchableOpacity>
+                <Button _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2}>
                     <Text>Edit Profile</Text>
                 </Button>
             </VStack>
@@ -80,11 +93,11 @@ export default function Profile() {
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     renderItem={({ item }) => <Avatar bg={'transparent'}
-                    source={item.img}
-                    size='lg' borderWidth={'1px'}
-                    marginLeft={2.5}
-                    borderColor={'gray.300'}
-                    p={'2px'} />}
+                        source={item.img}
+                        size='lg' borderWidth={'1px'}
+                        marginLeft={2.5}
+                        borderColor={'gray.300'}
+                        p={'2px'} />}
                 />
             </HStack>
         </VStack>
