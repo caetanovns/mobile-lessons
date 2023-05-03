@@ -14,11 +14,23 @@
     }
   ],
   "profile": {
-    "username": "caetanovns",
-    "name": "Caetano Vieira",
+    "username": "user test",
+    "name": "Usuário Teste",
     "posts": "312",
     "followers": "431",
     "following": "231",
     "description": "Username description"
-  }
+  },
+  "users": [
+    {
+      "id": 1,
+      "username": "user1",
+      "password": "123",
+      "name": "Usuário 1",
+      "posts": "312",
+      "followers": "431",
+      "following": "231",
+      "description": "Username description"
+    }
+  ]
 }

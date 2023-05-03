@@ -5,6 +5,8 @@ import Auth from "../pages/auth";
 import Login from "../pages/login";
 import AuthContext from "./auth_context";
 import HomeScreenRouters from "./home_screen_routes";
+import { doLogin } from "../services/requests/users";
+import { Alert } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -19,12 +21,19 @@ export default function LoginRouters() {
     //     setisSignedIn(true);
     // }, []);
 
-
+    async function loginAction(data) {
+        user = await doLogin(data.username, data.password)
+        console.log(user.length);
+        if (user.length) {
+            setisSignedIn(true);
+        } else {
+            setisSignedIn(false);
+            Alert.alert("Erro ao fazer login", "usuário não foi encontrado em nossa base de dados.");
+        }
+    }
 
     const authContext = useMemo(() => ({
-        signIn: (data) => {
-            setisSignedIn(true);
-        },
+        signIn: (data) => loginAction(data),
         signOut: (data) => {
             setisSignedIn(false);
         }

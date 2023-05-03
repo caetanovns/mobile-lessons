@@ -14,8 +14,6 @@ export default function Login({ onPress }) {
 
     const route = useRoute();
 
-    const { user, pass } = route.params;
-
     const [username, setUsername] = useState('');
 
     const [password, setPassword] = useState('');

@@ -10,3 +10,14 @@ export async function finduser() {
         return {}
     }
 }
+
+export async function doLogin(username, password) {
+    try {
+        const result = await api.get("/users?username=" + username + "&password=" + password);
+        return result.data
+    }
+    catch (error) {
+        console.log(error)
+        return {}
+    }
+}

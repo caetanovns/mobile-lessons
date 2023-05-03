@@ -22,15 +22,12 @@ export default function Auth() {
                 <Image source={profile_logo} />
             </View>
 
-            <TouchableOpacity style={styles.button_container} onPress={() => { signIn() }}>
+            <TouchableOpacity style={styles.button_container} onPress={() => { signIn({ "username": "user1", "password": "123" }) }}>
                 <Text style={styles.login_button}>Log In</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-                navigation.navigate('login', {
-                    'user': 'teste',
-                    'pass': 'teste'
-                })
+                navigation.navigate('login')
             }}>
                 <View style={styles.center_container}>
                     <Text style={styles.text_color}>Switch accounts</Text>
