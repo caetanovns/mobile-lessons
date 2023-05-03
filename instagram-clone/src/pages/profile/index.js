@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import AuthContext from "../../routes/auth_context";
 import { VStack, HStack, Text, Avatar, Button } from "native-base";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
 import { FlatList } from "react-native";
@@ -11,6 +12,7 @@ import Oval3 from '../../../assets/profile/Oval-2.png';
 import MoreIcon from '../../../assets/more.png';
 
 import { finduser } from "../../services/requests/users";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Profile() {
 
@@ -36,6 +38,8 @@ export default function Profile() {
 
     const { signOut } = useContext(AuthContext);
 
+    const navigator = useNavigation();
+
     async function findProfile() {
         const result = await finduser()
         if (result) {
@@ -55,7 +59,7 @@ export default function Profile() {
                         </HStack>
                     </TouchableOpacity>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => {navigator.openDrawer()}}>
                         <Feather name='menu' size={24} color='black' />
                     </TouchableOpacity>
                 </HStack>

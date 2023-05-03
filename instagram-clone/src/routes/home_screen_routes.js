@@ -7,6 +7,7 @@ import Search from '../pages/search';
 import Notification from '../pages/notification';
 import Media from '../pages/media';
 import { StyleSheet } from 'react-native';
+import ProfileDrawer from './profile_drawer';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +24,7 @@ export default function HomeScreenRouters() {
                         return <Ionicons style={styles.icon_size} name={focused == true ? 'add-circle' : 'add-circle-outline'} size={size} color={color} />
                     } else if (route.name === 'notification') {
                         return <Ionicons style={styles.icon_size} name={focused == true ? 'heart' : 'heart-outline'} size={size} color={color} />
-                    } else if (route.name === 'profile') {
+                    } else if (route.name === 'profile_drawer') {
                         return <Ionicons style={styles.icon_size} name={focused == true ? 'person' : 'person-outline'} size={size} color={color} />
                     }
                 },
@@ -40,7 +41,7 @@ export default function HomeScreenRouters() {
             <Tab.Screen name="search" component={Search} />
             <Tab.Screen name="media" component={Media} />
             <Tab.Screen name="notification" component={Notification} />
-            <Tab.Screen name="profile" component={Profile} />
+            <Tab.Screen name="profile_drawer" component={ProfileDrawer}/>
         </Tab.Navigator>
     );
 }
