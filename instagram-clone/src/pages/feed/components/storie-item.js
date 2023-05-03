@@ -9,7 +9,6 @@ export default function StorieItem({ name, photo, has_storie }) {
 
     const [viewStorie, setviewStorie] = useState(has_storie);
 
-    console.log(viewStorie);
     return <TouchableOpacity onPress={() => { setviewStorie(false) }}>
         <View style={{ marginRight: 15 }}>
             <Image source={photo} style={styles.profile} />
