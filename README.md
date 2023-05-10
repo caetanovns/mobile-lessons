@@ -7,3 +7,5 @@ Na pasta [instagram-clone](/instagram-clone/) é possível acessar todo o códig
 O repositório é construido ao longo do semestre, junto com algumas constribuições da turma. Através das [releases](https://github.com/caetanovns/mobile-lessons/tags) é possível acessar o código alguma feature que foi desenvolvida na disciplina de maneira gradual.
 
 Nas pastas nomeadas com prefixo de `lessons` são armazenada alguns materiais guias para a condução da aula.
+
+Contribuição Criativa de Jorge
