@@ -8,6 +8,7 @@ import Notification from '../pages/notification';
 import Media from '../pages/media';
 import { StyleSheet } from 'react-native';
 import ProfileDrawer from './profile_drawer';
+import EditProfile from './edit_profile'
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +42,7 @@ export default function HomeScreenRouters() {
             <Tab.Screen name="search" component={Search} />
             <Tab.Screen name="media" component={Media} />
             <Tab.Screen name="notification" component={Notification} />
-            <Tab.Screen name="profile_drawer" component={ProfileDrawer}/>
+            <Tab.Screen name="profile_drawer" component={EditProfile}/>
         </Tab.Navigator>
     );
 }

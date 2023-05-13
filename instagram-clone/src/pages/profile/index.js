@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../routes/auth_context";
 import { VStack, HStack, Text, Avatar, Button } from "native-base";
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
 import { FlatList } from "react-native";
@@ -14,14 +13,21 @@ import MoreIcon from '../../../assets/more.png';
 import { finduser } from "../../services/requests/users";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Profile() {
+export default function Profile({navigation}) {
 
-    const [user, setUser] = useState({});
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://10.0.0.6:3000/users/1`)
+        .then(response => response.json())
+        .then(data => setData(data))
+        .catch(error => console.error(error));
+      });
 
     const UserProfileData = [
-        { label: 'Posts', number: user.posts },
-        { label: 'Followers', number: user.followers },
-        { label: 'Following', number: user.following }
+        { label: 'Posts', number: data.posts },
+        { label: 'Followers', number: data.followers },
+        { label: 'Following', number: data.following }
     ]
 
     const UserDestaquesData = [
@@ -35,7 +41,7 @@ export default function Profile() {
         { label: 'Design', img: Oval3 },
         { label: 'Design', img: Oval3 }
     ]
-
+    
     const { signOut } = useContext(AuthContext);
 
     const navigator = useNavigation();
@@ -46,7 +52,7 @@ export default function Profile() {
             setUser(result)
         }
     }
-
+    
     return (
         <VStack flex={1} bg={'#FFFFFF'}>
             <VStack py={4} justifyContent={'flex-end'} alignItems={'flex-end'}>
@@ -54,7 +60,9 @@ export default function Profile() {
                     <TouchableOpacity>
                         <HStack alignItems={'center'} justifyContent={'flex-end'}>
                             <FontAwesome name='lock' size={24} color='black' />
-                            <Text px={3}>{user.username}</Text>
+                           
+                            <Text px={3}>{data.username}</Text>
+                            
                             <Feather name='chevron-down' size={24} color='black' />
                         </HStack>
                     </TouchableOpacity>
@@ -80,13 +88,14 @@ export default function Profile() {
             </HStack>
 
             <VStack pt={3} px={3} marginLeft={3}>
-                <Text>{user.name}</Text>
-                <Text>Digital godies designer @pixellz</Text>
-                <Text>Everything is designed.</Text>
+                <Text>{data.name}</Text>
+                <Text>{data.description}</Text>
                 <TouchableOpacity onPress={findProfile}>
                     <Text>click aqui</Text>
                 </TouchableOpacity>
-                <Button _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2}>
+                <Button _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2} onPress={() => {
+                navigation.navigate('Edit')
+              }}>
                     <Text>Edit Profile</Text>
                 </Button>
             </VStack>
@@ -105,5 +114,6 @@ export default function Profile() {
                 />
             </HStack>
         </VStack>
+
     )
 }
