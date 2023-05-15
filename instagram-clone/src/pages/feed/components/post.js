@@ -13,16 +13,26 @@ import CommentIcon from '../../../../assets/feed/comment.svg';
 import MessagerIcon from '../../../../assets/feed/messager.svg';
 
 import SaveIcon from '../../../../assets/feed/save.svg';
+import SaveFillIcon from '../../../../assets/feed/save_copy.svg';
 
 export default function Post({ liked }) {
 
-    const [postlike, setpostlike] = useState(liked);
+    const [postlike, setpostlike] = useState();
+    const [postsave, setpostsave] = useState();
 
     const PostLiked = ({ liked }) => {
         if (liked) {
             return <LikeFillIcon style={{ marginLeft: 5 }} />;
         } else {
             return <LikeIcon style={{ marginLeft: 5 }} />;
+        }
+    }
+
+    const PostSaved = ({ saved }) => {
+        if (saved) {
+            return <SaveFillIcon style={{ marginLeft: 5 }} />;
+        } else {
+            return <SaveIcon style={{ marginLeft: 5 }} />;
         }
     }
 
@@ -55,10 +65,11 @@ export default function Post({ liked }) {
                     </TouchableOpacity>
 
                 </View>
-
-                <TouchableOpacity>
-                    <SaveIcon style={{ marginRight: 5 }} />
+                
+                <TouchableOpacity onPress={() => { setpostsave(!postsave) }}>
+                        <PostSaved saved={postsave} />
                 </TouchableOpacity>
+
             </View>
             <View style={styles.post_comment_container}>
                 <Image source={profile} style={styles.profile_comment} />

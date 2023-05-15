@@ -5,6 +5,16 @@ import profile_mock from '../../../../mocks/profiles';
 
 export default function Stories() {
     return (
+        // Será a primeira parte do componente
+        // <View style={styles.container}>
+        //     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        //         <StorieItem/>
+        //         <StorieItem/>
+        //         <StorieItem/>
+        //         <StorieItem/>
+        //     </ScrollView>
+        // </View>
+
         <View style={styles.container}>
             <FlatList
                 horizontal

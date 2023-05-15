@@ -1,109 +1,216 @@
-import { useContext, useState } from "react";
-import AuthContext from "../../routes/auth_context";
-import { VStack, HStack, Text, Avatar, Button } from "native-base";
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Feather, FontAwesome } from '@expo/vector-icons';
-import { TouchableOpacity } from "react-native";
-import { FlatList } from "react-native";
+import { useContext, useEffect } from "react";
+import { Text,View,StyleSheet,TouchableOpacity} from "react-native";
+import { useState } from "react";
+import {useNavigation} from "@react-navigation/native";
 
-import Oval1 from '../../../assets/profile/Oval.png';
-import Oval2 from '../../../assets/profile/Oval-1.png';
-import Oval3 from '../../../assets/profile/Oval-2.png';
-import MoreIcon from '../../../assets/more.png';
+import PrivateIcon from "../../../assets/profile/privateIcon.svg";
+import AccountList from "../../../assets/profile/AccountsList.svg";
+import User from "../../../assets/profile/User.svg";
+import Menu from "../../../assets/profile/Menu.svg";
+import Mais from "../../../assets/profile/Mais.svg";
+import Friends from "../../../assets/profile/Friends.svg"
+import Sport from "../../../assets/profile/Sport.svg"
+import Design from "../../../assets/profile/Design.svg"
 
-import { finduser } from "../../services/requests/users";
-import { useNavigation } from "@react-navigation/native";
+import StoryVazio from "../../../assets/profile/storyvazio.svg";
+import StoryIcon from "../../../assets/feed/story.svg";
 
-export default function Profile() {
 
-    const [user, setUser] = useState({});
 
-    const UserProfileData = [
-        { label: 'Posts', number: user.posts },
-        { label: 'Followers', number: user.followers },
-        { label: 'Following', number: user.following }
-    ]
 
-    const UserDestaquesData = [
-        { label: 'new', img: MoreIcon },
-        { label: 'Friends', img: Oval1 },
-        { label: 'Sport', img: Oval2 },
-        { label: 'Design', img: Oval3 },
-        { label: 'Design', img: Oval3 },
-        { label: 'Design', img: Oval3 },
-        { label: 'Design', img: Oval3 },
-        { label: 'Design', img: Oval3 },
-        { label: 'Design', img: Oval3 }
-    ]
 
-    const { signOut } = useContext(AuthContext);
 
-    const navigator = useNavigation();
+export default function Profile(has_storie) {
+    const [storie , setStorie] = useState(has_storie);
+    const [data, setData] = useState([]);
 
-    async function findProfile() {
-        const result = await finduser()
-        if (result) {
-            setUser(result)
-        }
-    }
+    useEffect(()=> {
+        fetch(`https://my-json-server.typicode.com/caetanovns/demo/users/1`)
+        .then(response => response.json())
+        .then(data => setData(data))
+    },[])
 
-    return (
-        <VStack flex={1} bg={'#FFFFFF'}>
-            <VStack py={4} justifyContent={'flex-end'} alignItems={'flex-end'}>
-                <HStack alignItems={'center'} justifyContent={'space-between'} w={'62%'} pr={'5%'}>
-                    <TouchableOpacity>
-                        <HStack alignItems={'center'} justifyContent={'flex-end'}>
-                            <FontAwesome name='lock' size={24} color='black' />
-                            <Text px={3}>{user.username}</Text>
-                            <Feather name='chevron-down' size={24} color='black' />
-                        </HStack>
+    const navigation = useNavigation();
+
+    return <View style = {styles.container}> 
+                {/* <NavigationContainer>
+                    <MeuDrawer />
+                </NavigationContainer> */}
+                
+                <View style = {styles.container_priv }>
+                    <PrivateIcon style={{marginLeft:115}}/>
+                    <Text style = {styles.text_principal_solid}>{data.username}</Text>
+                    <AccountList style={{marginLeft:15}}/>
+                    <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
+                        <Menu style={{marginLeft:105}}/>
                     </TouchableOpacity>
+                </View>
 
-                    <TouchableOpacity onPress={() => {navigator.openDrawer()}}>
-                        <Feather name='menu' size={24} color='black' />
+                <View style = {styles.container_seg}>
+
+                    <TouchableOpacity onPress={()=>{setStorie(false)}}>
+                        <View style={{ marginRight: 15 }}>
+                        <User style = {styles.img_user}/>
+                            {storie ? <StoryIcon style={styles.circle} width={106} height={106} /> : <StoryVazio style={styles.circle} width={106} height={106} /> }
+                        </View>
                     </TouchableOpacity>
-                </HStack>
-            </VStack>
+                    
 
-            <HStack justifyContent={'space-around'} marginLeft={3}>
-                <Avatar source={{ uri: 'https://via.placeholder.com/150' }} size={'xl'}>
-                    <Avatar.Badge bg="green.500" />
-                </Avatar>
-                <HStack justifyContent={'flex-end'} alignItems={'center'}>
-                    {UserProfileData.map((item, index) => (
-                        <VStack key={index} px={3}>
-                            <Text textAlign={'center'} fontSize={22} bold>{item.number}</Text>
-                            <Text textAlign={'center'} fontSize={16}>{item.label}</Text>
-                        </VStack>
-                    ))}
-                </HStack>
-            </HStack>
+                    <View style = {styles.space}>
+                        <Text style = {styles.number}>{data.posts}</Text>
+                        <Text style = {styles.text}>Posts</Text>
+                    </View>
+                    
+                    <View style = {styles.space}>
+                        <Text style = {styles.number}>{data.followers}</Text>
+                        <Text style = {styles.text}>Followers</Text>
+                    </View>
 
-            <VStack pt={3} px={3} marginLeft={3}>
-                <Text>{user.name}</Text>
-                <Text>Digital godies designer @pixellz</Text>
-                <Text>Everything is designed.</Text>
-                <TouchableOpacity onPress={findProfile}>
-                    <Text>click aqui</Text>
+                    <View style = {styles.space}>
+                        <Text style = {styles.number}>{data.following}</Text>
+                        <Text style = {styles.text}>Following</Text>
+                    </View>
+                </View>
+
+                <View style={{marginTop:12 , marginRight:140}}>
+                    <Text style = {styles.text_principal}>{data.name}</Text>
+                    <Text style = {styles.text}>Digital goodies designer @pixsellz </Text>
+                    <Text style = {styles.text}>{data.description}</Text>
+                </View>
+
+                <TouchableOpacity style = {styles.buttom_touch} >
+                    <Text style = {styles.text_touch}>Edit Profile</Text>
                 </TouchableOpacity>
-                <Button _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2}>
-                    <Text>Edit Profile</Text>
-                </Button>
-            </VStack>
 
-            <HStack py={3}>
-                <FlatList
-                    data={UserDestaquesData}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => <Avatar bg={'transparent'}
-                        source={item.img}
-                        size='lg' borderWidth={'1px'}
-                        marginLeft={2.5}
-                        borderColor={'gray.300'}
-                        p={'2px'} />}
-                />
-            </HStack>
-        </VStack>
-    )
+                <View style={{flexDirection:'row',marginRight:70}}>
+
+                    <TouchableOpacity style={{marginTop:18,marginLeft:20}}> 
+                        <Mais style={{marginTop:23,marginLeft:23}}/>
+                        <StoryVazio style={styles.circle_destak} width={64} height={64} /> 
+                        <Text style={styles.text_new}>New</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{marginTop:18,marginLeft:40}}> 
+                        <Friends style={{marginTop:4,marginLeft:4.5}}/>
+                        <StoryVazio style={styles.circle_destak} width={64} height={64} /> 
+                        <Text style={styles.text_}>Friends</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{marginTop:18,marginLeft:20 }}> 
+                        <Sport style={{marginLeft:4.5,marginTop:4}}/>
+                        <StoryVazio style={styles.circle_destak} width={64} height={64} />
+                        <Text style={styles.text_}>Sport </Text> 
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{marginTop:18, marginLeft:20}}> 
+                        <Design style={{marginLeft:4.5,marginTop:4}}/>
+                        <StoryVazio style={styles.circle_destak} width={64} height={64} /> 
+                        <Text style={styles.text_}>Design</Text>
+                    </TouchableOpacity>
+
+                </View>
+
+            </View>           
+
+
+
+
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+    },
+
+    container_priv:{
+        flexDirection:'row',
+        marginTop:25,
+        alignItems:'center',
+    },
+
+    container_seg:{
+        flexDirection:"row",
+        alignItems:'center'
+    },
+
+    text_principal_solid: {
+        fontWeight:'bold',
+        fontSize:20,
+        marginLeft:15
+
+    },
+    text_principal: {
+        fontWeight:'bold',
+        fontSize:20,    
+    },
+
+    img_user:{
+        marginRight:50,
+        marginTop:50,
+        marginLeft:5
+    },
+
+    number:{
+        fontSize:20,
+        fontWeight:'bold',
+    },
+
+    text:{
+        fontSize:16,
+        fontWeight:'300',
+    },
+
+    space:{
+        padding:7,
+        marginTop:45,
+        alignItems:'center'
+    },
+
+    circle: {
+        position: 'absolute',
+        marginTop:45,
+    },
+
+    buttom_touch:{
+        width:343,
+        height:32,
+        borderRadius:6,
+        borderWidth:1,
+        borderColor:"#C3C4C3",
+        marginTop:15,
+        alignItems:'center'
+    },
+
+    text_touch:{
+        fontSize:16,
+        fontWeight:"bold",
+        marginTop:5,
+    },
+
+    destaque: {
+        width: 68,
+        height: 68,
+    },
+
+    circle_: {
+        position: 'absolute',
+    },
+    
+    circle_destak: {
+        position: 'absolute',
+        marginRight:150
+    },
+    text_: {
+        marginTop: 7,
+        textAlign: 'center',
+        fontWeight:'300',
+    },
+    text_new:{
+        marginTop: 25,
+        marginLeft:20,
+        fontWeight:'300',
+    }
+  });
+  

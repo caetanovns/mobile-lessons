@@ -24,7 +24,7 @@
   "users": [
     {
       "id": 1,
-      "username": "user1",
+      "username": "user1", 
       "password": "123",
       "name": "Usuário 1",
       "posts": "312",
