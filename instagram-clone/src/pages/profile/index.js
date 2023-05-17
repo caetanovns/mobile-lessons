@@ -15,10 +15,12 @@ import axios from "axios";
 
 export default function Profile({navigation}) {
 
+    const {isLogedIn} = useContext(AuthContext);
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`http://10.0.0.6:3000/users/1`)
+        fetch('https://my-json-server.typicode.com/caetanovns/demo/users/' + isLogedIn)
         .then(response => response.json())
         .then(data => setData(data))
         .catch(error => console.error(error));
@@ -79,10 +81,12 @@ export default function Profile({navigation}) {
             </HStack>
 
             <VStack pt={3} px={3} marginLeft={3}>
-                <Text>{user.name}</Text>
-                <Text>Digital godies designer @pixellz</Text>
+                <Text>{data.name}</Text>
+                <Text>{data.description}</Text>
                 <Text>Everything is designed.</Text>
-                <Button onPress={navigation.navigate('Edit')} _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2}>
+                <Button _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2} onPress={() => {
+                    navigation.navigate('Edit')
+                }}>
                     <Text>Edit Profile</Text>
                 </Button>
             </VStack>

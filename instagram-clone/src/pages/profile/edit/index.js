@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, TextInput, Button, StyleSheet, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AuthContext from "./../../../routes/auth_context";
 
 import profilePhoto from '../../../../assets/Oval.png'
 
-const Edit = ({ navigation}) => {
+const Edit = ({ navigation }) => {
+  
+  const {isLogedIn} = useContext(AuthContext);
 
   const [inputDataName, setInputDataName] = useState('');
 
@@ -31,7 +34,7 @@ const Edit = ({ navigation}) => {
       body: JSON.stringify({ name: inputDataName, username: inputDataUserName, description: inputDataDescription})
     };
 
-    fetch(`http://10.0.0.6:3000/users/1`, requestOptions)
+    fetch('https://my-json-server.typicode.com/caetanovns/demo/users/' + isLogedIn , requestOptions)
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.log(error));
