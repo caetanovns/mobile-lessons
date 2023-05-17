@@ -10,8 +10,8 @@ import Oval2 from '../../../assets/profile/Oval-1.png';
 import Oval3 from '../../../assets/profile/Oval-2.png';
 import MoreIcon from '../../../assets/more.png';
 
-import { finduser } from "../../services/requests/users";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 export default function Profile({navigation}) {
 
@@ -41,18 +41,9 @@ export default function Profile({navigation}) {
         { label: 'Design', img: Oval3 },
         { label: 'Design', img: Oval3 }
     ]
-    
-    const { signOut } = useContext(AuthContext);
 
     const navigator = useNavigation();
 
-    async function findProfile() {
-        const result = await finduser()
-        if (result) {
-            setUser(result)
-        }
-    }
-    
     return (
         <VStack flex={1} bg={'#FFFFFF'}>
             <VStack py={4} justifyContent={'flex-end'} alignItems={'flex-end'}>
@@ -67,7 +58,7 @@ export default function Profile({navigation}) {
                         </HStack>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => {navigator.openDrawer()}}>
+                    <TouchableOpacity onPress={() => { navigator.openDrawer() }}>
                         <Feather name='menu' size={24} color='black' />
                     </TouchableOpacity>
                 </HStack>
@@ -88,14 +79,10 @@ export default function Profile({navigation}) {
             </HStack>
 
             <VStack pt={3} px={3} marginLeft={3}>
-                <Text>{data.name}</Text>
-                <Text>{data.description}</Text>
-                <TouchableOpacity onPress={findProfile}>
-                    <Text>click aqui</Text>
-                </TouchableOpacity>
-                <Button _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2} onPress={() => {
-                navigation.navigate('Edit')
-              }}>
+                <Text>{user.name}</Text>
+                <Text>Digital godies designer @pixellz</Text>
+                <Text>Everything is designed.</Text>
+                <Button onPress={navigation.navigate('Edit')} _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2}>
                     <Text>Edit Profile</Text>
                 </Button>
             </VStack>

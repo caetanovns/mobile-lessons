@@ -12,22 +12,14 @@ const Stack = createStackNavigator();
 
 export default function LoginRouters() {
 
-    const [isSignedIn, setisSignedIn] = useState(true);
-
-    // Pode tentar recuperar o token, 
-    // para que o usuário não precise 
-    // logar novamente
-    // useEffect(() => {
-    //     setisSignedIn(true);
-    // }, []);
+    const [isSignedIn, setisSignedIn] = useState(1);
 
     async function loginAction(data) {
         user = await doLogin(data.username, data.password)
-        console.log(user.length);
         if (user.length) {
-            setisSignedIn(true);
+            setisSignedIn(user[0].id);
         } else {
-            setisSignedIn(false);
+            setisSignedIn(null);
             Alert.alert("Erro ao fazer login", "usuário não foi encontrado em nossa base de dados.");
         }
     }
@@ -35,29 +27,24 @@ export default function LoginRouters() {
     const authContext = useMemo(() => ({
         signIn: (data) => loginAction(data),
         signOut: (data) => {
-            setisSignedIn(false);
-        }
-    }), []);
-
-    const LoginState = () => {
-        return <Login onPress={() => {
-            setisSignedIn(!isSignedIn);
-        }} />
-    };
+            setisSignedIn(null);
+        },
+        isLogedIn: isSignedIn
+    }), [isSignedIn]);
 
     return (
         <AuthContext.Provider value={authContext}>
             <Stack.Navigator screenOptions={{
                 headerShown: false
             }}>
-                {isSignedIn ? (
+                {isSignedIn != null ? (
                     <>
                         <Stack.Screen name="home_screen_routers" component={HomeScreenRouters} />
                     </>
                 ) : (
                     <>
                         <Stack.Screen name="auth" component={Auth} />
-                        <Stack.Screen name="login" component={LoginState} />
+                        <Stack.Screen name="login" component={Login} />
                     </>
                 )}
             </Stack.Navigator>

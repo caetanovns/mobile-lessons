@@ -21,3 +21,14 @@ export async function doLogin(username, password) {
         return {}
     }
 }
+
+export async function getUser(id) {
+    try {
+        const result = await api.get("/users/" + id);
+        return result.data
+    }
+    catch (error) {
+        console.log(error)
+        return {}
+    }
+}
