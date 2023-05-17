@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://192.168.1.16:3000/"
+    baseURL: "https://my-json-server.typicode.com/caetanovns/demo/"
 })
 
 export default api;

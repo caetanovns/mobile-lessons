@@ -10,7 +10,7 @@ export default function Auth() {
 
     const navigation = useNavigation();
 
-    const { signIn } = useContext(AuthContext);
+    const { isLogedIn } = useContext(AuthContext);
 
     return <>
         <View style={styles.form_container}>

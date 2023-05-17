@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../routes/auth_context";
 import { VStack, HStack, Text, Avatar, Button } from "native-base";
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -11,12 +11,23 @@ import Oval2 from '../../../assets/profile/Oval-1.png';
 import Oval3 from '../../../assets/profile/Oval-2.png';
 import MoreIcon from '../../../assets/more.png';
 
-import { finduser } from "../../services/requests/users";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 export default function Profile() {
 
     const [user, setUser] = useState({});
+
+    const { isLogedIn } = useContext(AuthContext);
+
+    useEffect(() => {
+        axios({
+            method: 'get',
+            url: 'https://my-json-server.typicode.com/caetanovns/demo/users/' + isLogedIn,
+        }).then((response) => {
+            setUser(response.data)
+        });
+    }, []);
 
     const UserProfileData = [
         { label: 'Posts', number: user.posts },
@@ -36,16 +47,7 @@ export default function Profile() {
         { label: 'Design', img: Oval3 }
     ]
 
-    const { signOut } = useContext(AuthContext);
-
     const navigator = useNavigation();
-
-    async function findProfile() {
-        const result = await finduser()
-        if (result) {
-            setUser(result)
-        }
-    }
 
     return (
         <VStack flex={1} bg={'#FFFFFF'}>
@@ -59,7 +61,7 @@ export default function Profile() {
                         </HStack>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => {navigator.openDrawer()}}>
+                    <TouchableOpacity onPress={() => { navigator.openDrawer() }}>
                         <Feather name='menu' size={24} color='black' />
                     </TouchableOpacity>
                 </HStack>
@@ -83,9 +85,6 @@ export default function Profile() {
                 <Text>{user.name}</Text>
                 <Text>Digital godies designer @pixellz</Text>
                 <Text>Everything is designed.</Text>
-                <TouchableOpacity onPress={findProfile}>
-                    <Text>click aqui</Text>
-                </TouchableOpacity>
                 <Button _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2}>
                     <Text>Edit Profile</Text>
                 </Button>

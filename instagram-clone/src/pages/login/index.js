@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 import AuthContext from "../../routes/auth_context";
 
 
-export default function Login({ onPress }) {
+export default function Login() {
 
     const navigation = useNavigation();
 
