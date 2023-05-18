@@ -14,18 +14,17 @@ import Design from "../../../assets/profile/Design.svg"
 
 import StoryVazio from "../../../assets/profile/storyvazio.svg";
 import StoryIcon from "../../../assets/feed/story.svg";
-
-
-
-
+import AuthContext from "../../routes/auth_context";
 
 
 export default function Profile(has_storie) {
+
+    const {getLogedIn} = useContext(AuthContext);
     const [storie , setStorie] = useState(has_storie);
     const [data, setData] = useState([]);
 
     useEffect(()=> {
-        fetch(`https://my-json-server.typicode.com/caetanovns/demo/users/1`)
+        fetch(`https://my-json-server.typicode.com/caetanovns/demo/users/`+ getLogedIn )
         .then(response => response.json())
         .then(data => setData(data))
     },[])

@@ -25,9 +25,9 @@ export default function LoginRouters() {
         user = await doLogin(data.username, data.password)
         console.log(user.length);
         if (user.length) {
-            setisSignedIn(true);
+            setisSignedIn(user[0].id);
         } else {
-            setisSignedIn(false);
+            setisSignedIn(null);
             Alert.alert("Erro ao fazer login", "usuário não foi encontrado em nossa base de dados.");
         }
     }
@@ -35,9 +35,10 @@ export default function LoginRouters() {
     const authContext = useMemo(() => ({
         signIn: (data) => loginAction(data),
         signOut: (data) => {
-            setisSignedIn(false);
-        }
-    }), []);
+            setisSignedIn(null);
+        },
+        getLogedIn: isSignedIn
+    }), [isSignedIn]);
 
     const LoginState = () => {
         return <Login onPress={() => {
@@ -50,7 +51,7 @@ export default function LoginRouters() {
             <Stack.Navigator screenOptions={{
                 headerShown: false
             }}>
-                {isSignedIn ? (
+                {isSignedIn != null ? (
                     <>
                         <Stack.Screen name="home_screen_routers" component={HomeScreenRouters} />
                     </>

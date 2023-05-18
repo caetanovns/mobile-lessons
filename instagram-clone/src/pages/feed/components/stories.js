@@ -1,26 +1,27 @@
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 import StorieItem from "./storie-item";
-
+import { useState , useEffect , useContext} from "react";
+import AuthContext from "../../../routes/auth_context";
 import profile_mock from '../../../../mocks/profiles';
 
 export default function Stories() {
-    return (
-        // Será a primeira parte do componente
-        // <View style={styles.container}>
-        //     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        //         <StorieItem/>
-        //         <StorieItem/>
-        //         <StorieItem/>
-        //         <StorieItem/>
-        //     </ScrollView>
-        // </View>
 
+    const {getLogedIn} = useContext(AuthContext);
+    const [user, setUser] = useState([]);
+
+    useEffect(()=> {
+        fetch(`https://my-json-server.typicode.com/caetanovns/demo/users/1`)
+        .then(response => response.json())
+        .then(user => setUser(user))
+    },[])
+
+    return (
         <View style={styles.container}>
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                data={profile_mock}
-                renderItem={({ item }) => <StorieItem name={item.name} photo={item.photo} has_storie={item.has_storie} />}
+                data={user.stories}
+                renderItem={({ item }) => <StorieItem name={item.username} photo={item.photo} has_storie={item.has_storie} />}
             />
         </View>
     );

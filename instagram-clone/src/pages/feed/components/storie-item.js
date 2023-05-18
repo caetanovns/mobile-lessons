@@ -3,8 +3,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 // import photo from "../../../../assets/feed/profile.png";
 import StoryIcon from "../../../../assets/feed/story.svg";
 import StoryVazio from "../../../../assets/profile/storyvazio.svg";
-import { useState } from "react";
-
+import { useState , useEffect , useContext} from "react";
+import AuthContext from "../../../routes/auth_context";
 
 export default function StorieItem({ name, photo, has_storie }) {
 
@@ -12,7 +12,7 @@ export default function StorieItem({ name, photo, has_storie }) {
 
     return <TouchableOpacity onPress={()=>{setStorie(false)}}>
         <View style={{ marginRight: 15 }}>
-            <Image source={photo} style={styles.profile} />
+            <Image source={{uri: photo}} style={styles.profile} />
             {storie ? <StoryIcon style={styles.circle} width={78} height={78} /> :< StoryVazio style={styles.circle} width={78} height={78} /> }
             <Text style={styles.text}>{name}</Text>
         </View>
