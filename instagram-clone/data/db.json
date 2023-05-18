@@ -24,13 +24,13 @@
   "users": [
     {
       "id": 1,
-      "username": "user1",
+      "username": "panda",
       "password": "123",
-      "name": "Usuário 1",
+      "name": "Panda",
       "posts": "312",
       "followers": "431",
       "following": "231",
-      "description": "Username description"
+      "description": "eu sou um panda."
     }
   ]
 }
