@@ -53,9 +53,9 @@ export default function Profile({navigation}) {
                     <TouchableOpacity>
                         <HStack alignItems={'center'} justifyContent={'flex-end'}>
                             <FontAwesome name='lock' size={24} color='black' />
-                           
+
                             <Text px={3}>{data.username}</Text>
-                            
+
                             <Feather name='chevron-down' size={24} color='black' />
                         </HStack>
                     </TouchableOpacity>
@@ -85,7 +85,7 @@ export default function Profile({navigation}) {
                 <Text>{data.description}</Text>
                 <Text>Everything is designed.</Text>
                 <Button _pressed={() => { }} my={3} bg={'white'} borderWidth={1} borderColor={'gray.300'} py={2} onPress={() => {
-                    navigation.navigate('Edit')
+                    navigation.navigate('Edit', {data: data})
                 }}>
                     <Text>Edit Profile</Text>
                 </Button>
