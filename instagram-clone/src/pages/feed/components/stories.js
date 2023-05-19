@@ -1,8 +1,5 @@
-import { FlatList, ScrollView, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import StorieItem from "./storie-item";
-import AuthContext from "../../routes/auth_context";
-const  {isLogedIn} = useContext(AuthContext);
-import profile_mock from '../../../../mocks/profiles';
 
 
 export default function Stories(storiProp) {

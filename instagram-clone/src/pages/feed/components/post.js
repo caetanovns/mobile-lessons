@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import profile from '../../../../assets/stories/caetano.jpg';
 
@@ -14,7 +14,7 @@ import MessagerIcon from '../../../../assets/feed/messager.svg';
 
 import SaveIcon from '../../../../assets/feed/save.svg';
 
-export default function Post({ liked }) {
+export default function Post({ liked, location,photo, profile_foto, name, comment }) {
 
     const [postlike, setpostlike] = useState(liked);
 
@@ -30,10 +30,10 @@ export default function Post({ liked }) {
         <View style={{ borderBottomColor: "#B3B3B3", borderBottomWidth: 0.5, paddingBottom: 10 }}>
             <View style={styles.container}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Image source={profile} style={styles.profile} />
+                    <Image source={{uri: profile_foto}} style={styles.profile} />
                     <View style={{ marginLeft: 10 }}>
-                        <Text style={styles.text_username}>segundo_caetano</Text>
-                        <Text style={styles.text_location}>Crato, Ceará</Text>
+                        <Text style={styles.text_username}>{name}</Text>
+                        <Text style={styles.text_location}>{location}</Text>
                     </View>
                 </View>
                 <MoreIcon style={styles.more_icon} />
@@ -61,7 +61,7 @@ export default function Post({ liked }) {
                 </TouchableOpacity>
             </View>
             <View style={styles.post_comment_container}>
-                <Image source={profile} style={styles.profile_comment} />
+                <Image source={{uri: photo}} style={styles.profile_comment} />
                 <View style={{ flexDirection: 'row', marginTop: -2.5 }}>
                     <Text style={{ marginLeft: 5 }}>Liked by </Text>
                     <Text style={{ fontWeight: 'bold' }}>craig_love </Text>
@@ -70,8 +70,8 @@ export default function Post({ liked }) {
                 </View>
             </View>
             <View style={{ flexDirection: 'row', marginTop: 5, justifyContent: 'flex-start', marginLeft: 15 }}>
-                <Text style={{ fontWeight: 'bold' }}>joshua_l</Text>
-                <Text style={{ marginLeft: 5, flex: 1 }}>The in game in Japan was amazing and I want to share some photos</Text>
+                <Text style={{ fontWeight: 'bold' }}>{comment.username}</Text>
+                <Text style={{ marginLeft: 5, flex: 1 }}>{comment.description}</Text>
             </View>
         </ View>
     );
