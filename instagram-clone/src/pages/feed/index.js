@@ -5,20 +5,29 @@ import TopContainer from "./components/top-container";
 
 import post_mock from '../../../mocks/posts';
 import Post from "./components/post";
+import { useEffect, useState } from "react";
 
 
 export default function Feed() {
+    const[data, setData] = useState([])
+
+    useEffect(() => {
+        fetch('https://my-json-server.typicode.com/caetanovns/demo/users/1')
+        .then(response => response.json())
+        .then(data => setData(data))
+    },[])
+
     return (
         <View style={{ backgroundColor: 'white' }}>
             <TopContainer />
             <FlatList
-                data={post_mock}
+                data={data.feed}
                 ListHeaderComponent={
                     <>
                         <Stories />
                     </>
                 }
-                renderItem={({ item }) => <Post liked={item.liked} />}
+                renderItem={({ item }) => <Post username = {item.username} location = {item.location} photo = {item.photo} profile_photo={item.profile_photo} comment={item.comment} liked={item.liked} />}
             />
         </View>
     );
