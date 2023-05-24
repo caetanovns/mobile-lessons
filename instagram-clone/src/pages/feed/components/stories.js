@@ -1,16 +1,28 @@
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 import StorieItem from "./storie-item";
 
-import profile_mock from '../../../../mocks/profiles';
+import api from "../../../services/api";
+import {useEffect, useState} from "react";
+
 
 export default function Stories() {
+
+    const [UserStories, setUserStories] = useState()
+
+    useEffect(()=> {
+        api.get("/users").then((data) => {
+                setUserStories(data.data[0].stories)
+            }
+        )
+    }, []);
+
     return (
         <View style={styles.container}>
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                data={profile_mock}
-                renderItem={({ item }) => <StorieItem name={item.name} photo={item.photo} has_storie={item.has_storie} />}
+                data={UserStories}
+                renderItem={({ item }) => <StorieItem name={item.username} photo={item.photo} has_storie={item.has_storie} />}
             />
         </View>
     );

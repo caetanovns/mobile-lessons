@@ -5,23 +5,25 @@ import AuthContext from "./../../../routes/auth_context";
 
 import profilePhoto from '../../../../assets/Oval.png'
 
-const Edit = ({ navigation }) => {
-  
+const Edit = ({ navigation, route }) => {
+
+  const data = route.params.data
+
   const {isLogedIn} = useContext(AuthContext);
 
-  const [inputDataName, setInputDataName] = useState('');
+  const [inputDataName, setInputDataName] = useState(data.name);
 
   const touchInputName = (text) => {
     setInputDataName(text);
   };
 
-  const [inputDataUserName, setInputDataUserName] = useState('');
+  const [inputDataUserName, setInputDataUserName] = useState(data.username);
 
   const touchInputUserName = (text) => {
     setInputDataUserName(text);
   };
 
-  const [inputDataDescription, setInputDataDescription] = useState('');
+  const [inputDataDescription, setInputDataDescription] = useState(data.description);
 
   const touchInputDescription = (text) => {
     setInputDataDescription(text);
@@ -38,7 +40,7 @@ const Edit = ({ navigation }) => {
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.log(error));
-    
+
     navigation.goBack()
   };
 
@@ -111,7 +113,6 @@ const styles = StyleSheet.create({
   con0: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
