@@ -1,0 +1,69 @@
+import React, {
+  createContext,
+  useContext,
+  useState,
+} from "react";
+
+import {
+  View,
+  Text,
+  Button,
+  ActivityIndicator,
+} from "react-native";
+
+// cria o contexto
+const LoadingContext = createContext();
+
+// provider
+function LoadingProvider({ children }) {
+  const [loading, setLoading] = useState(false);
+
+  function toggleLoading() {
+    setLoading((prev) => !prev);
+  }
+
+  return (
+    <LoadingContext.Provider
+      value={{ loading, toggleLoading }}
+    >
+      {children}
+    </LoadingContext.Provider>
+  );
+}
+
+// componente que usa o contexto
+function Home() {
+  const { loading, toggleLoading } =
+    useContext(LoadingContext);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 20,
+      }}
+    >
+      <Text>
+        Loading: {loading ? "true" : "false"}
+      </Text>
+
+      {loading && <ActivityIndicator size="large" />}
+
+      <Button
+        title="Toggle Loading"
+        onPress={toggleLoading}
+      />
+    </View>
+  );
+}
+
+// app
+export default function App() {
+  return (
+    <LoadingProvider>
+      <Home />
+    </LoadingProvider>
+  );
+}
